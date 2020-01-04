@@ -9,7 +9,22 @@
 </head>
 
 <body>
+
  <h1>This is <%= kindOfDay %> </h1>
+
+ <ul>
+  
+  <% for(var i = 0; i < appendItems.length; i++){ %>
+   <li> <%= appendItems[i] %> </li>
+  <% } %>
+
+ </ul>
+ 
+ <form action="/" method="POST">
+  <input type="text" name="newItem">
+  <button type="submit">Add</button>
+ </form>
+
 </body>
 
 </html>

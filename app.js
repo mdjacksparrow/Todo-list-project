@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 
 var app = express();
 
+var items = ["Buy food", "Cook food", "Eat Food"];
+
 // Setting ejs view engine
 app.set("view engine", "ejs");
 
@@ -17,17 +19,16 @@ var weekday = date.getDay();
 var options = { weekday: "long" };
 var currentDay = new Intl.DateTimeFormat("en-US", options).format(date);
 
-for(let i = 0; i < 7; i++){
-     
-     if(weekday === i){
-        res.render("list", { kindOfDay: currentDay });
-        break;
-     }
-}
+ res.render("list", { kindOfDay: currentDay, appendItems : items });
+}); 
 
- res.sendFile(__dirname + '/index.html');
+app.post('/', (req,res) => {
+ var item = req.body.newItem;
+
+ items.push(item);
+
+ res.redirect('/');
 });
-
 
 // Create server port 
 app.listen(process.env.PORT || 4000, () => {
